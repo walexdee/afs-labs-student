@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app-deployment
+  name: db-deployment
   namespace: adaramola
   labels:
-    app: app
+    app: db
 spec:
   replicas: 1
   strategy:
@@ -12,17 +12,17 @@ spec:
   minReadySeconds: 20
   selector:
     matchLabels:
-      app: app
+      app: db
   template:
     metadata:
       labels:
-        app: app
+        app: db
     spec:
       containers:
       - envFrom:
         - secretRef:
             name: db-secret
-        name: app-deployment
-        image: https://harbor.dev.afsmtddso.com/harbor/projects/176/repositories/app
+        name: db-deployment
+        image: <IMAGE URL>
         ports:
-        - containerPort: 5000
+        - containerPort: 5432
